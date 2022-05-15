@@ -4,6 +4,7 @@ const { check } = require('express-validator');
 
 const { crearUsuario, iniciarSesion, renovarJWT } = require('../controllers/auth');
 const { validarCampos } = require('../middlewares/validar-campos');
+const { validarJWT } = require('../middlewares/validar-jwt');
 
 const router = Router();
 
@@ -13,7 +14,7 @@ router.post('/', [
     validarCampos
 ], iniciarSesion);
 
-router.get('/renew', renovarJWT);
+router.get('/renew', validarJWT, renovarJWT);
 
 router.post('/new', [
     check('name', 'El nombre del usuario es obligatorio').not().isEmpty(),
