@@ -12,7 +12,7 @@ const iniciarSesion = async(req = request, res = response) => {
         const usuario = await Usuario.findOne({ email });
 
         if (!usuario) {
-            res.status(400).json({
+            return res.status(400).json({
                 ok: false,
                 msg: 'Los datos enviados no son incorrectos'
             });
@@ -21,7 +21,7 @@ const iniciarSesion = async(req = request, res = response) => {
         // Confirmar los passwords
         const validPassword = bcrypt.compareSync(password, usuario.password);
         if (!validPassword) {
-            res.status(400).json({
+            return res.status(400).json({
                 ok: false,
                 msg: 'Los datos enviados no son incorrectos'
             });
@@ -66,7 +66,7 @@ const crearUsuario = async(req = request, res = response) => {
         let usuario = await Usuario.findOne({ email });
 
         if (usuario) {
-            res.status(400).json({
+            return res.status(400).json({
                 ok: false,
                 msg: `Ya existe un usuario con el correo ${email}`
             });
