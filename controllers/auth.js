@@ -31,7 +31,8 @@ const iniciarSesion = async(req = request, res = response) => {
 
         res.json({
             ok: true,
-            msg: usuario,
+            uid: usuario.id,
+            name: usuario.name,
             token
         });
     } catch (error) {
@@ -53,6 +54,8 @@ const renovarJWT = async(req = request, res = response) => {
 
     res.json({
         ok: true,
+        uid,
+        name,
         token
     });
 };
@@ -84,7 +87,8 @@ const crearUsuario = async(req = request, res = response) => {
 
         res.status(201).json({
             ok: true,
-            msg: usuario,
+            uid: usuario.id,
+            name: usuario.name,
             token
         });
 
